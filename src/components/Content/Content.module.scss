@@ -1,0 +1,36 @@
+.content {
+  padding: 40px;
+
+  h1 {
+    margin: 0;
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .content__search__group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .content__search {
+      border: 1px solid #f3f3f3;
+      border-radius: 10px;
+      padding: 0 15px;
+
+      input {
+        border: none;
+        padding: 13px;
+        font-size: 16px;
+        font-family: 'Inter', sans-serif;
+        width: 200px;
+      }
+
+      input:active {
+        border: none;
+      }
+    }
+  }
+}
