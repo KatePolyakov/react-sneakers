@@ -12,9 +12,17 @@
 
   .content__card__wrapper {
     padding: 20px 44px 33px 34px;
+
     .content__favorite {
       position: absolute;
       cursor: pointer;
+
+      button {
+        border: none;
+        background: none;
+        margin: 0;
+        padding: 0;
+      }
     }
 
     p {

@@ -5,10 +5,10 @@ import { Card } from '../Card/Card';
 import classes from './Content.module.scss';
 
 const arr = [
-  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: './img/sneakers/1.jpg', price: '250' },
-  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: './img/sneakers/2.jpg', price: '235' },
-  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: './img/sneakers/3.jpg', price: '185' },
-  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: './img/sneakers/4.jpg', price: '150' },
+  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: '../../img/sneakers/1.jpg', price: '250' },
+  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: '../../img/sneakers/2.jpg', price: '235' },
+  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: '../../img/sneakers/3.jpg', price: '185' },
+  { title: "Men's sneakers Nike Blazer Mid Suede", imgURL: '../../img/sneakers/4.jpg', price: '150' },
 ];
 
 export const Content = () => {
@@ -34,7 +34,13 @@ export const Content = () => {
         </div>
       </div>
       {arr.map((val) => (
-        <Card title={val.title} price={val.price} imgURL={val.imgURL} />
+        <Card
+          title={val.title}
+          price={val.price}
+          imgURL={val.imgURL}
+          onPlusClick={() => console.log("plus")}
+          onAddFav={() => console.log("favorite")}
+        />
       ))}
     </div>
   );
