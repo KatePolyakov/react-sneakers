@@ -4,7 +4,11 @@ import Sneaker from '../../img/sneakers/1.jpg';
 
 import classes from './Card.module.scss';
 
-export const Card = () => {
+const buttonAlert = () => {
+  return alert(456);
+};
+
+export const Card = (props) => {
   return (
     <div className={classes.content__card}>
       <div className={classes.content__card__wrapper}>
@@ -23,16 +27,16 @@ export const Card = () => {
             />
           </svg>
         </div>
-        <img src={Sneaker} alt="Sneakers_" />
-        <p>Men's Sneaker Nike Blazer Mid Suede</p>
+        <img src={props.imgURL} alt="Sneakers_" />
+        <p>{props.title}</p>
         <div className={classes.content__card__wrapper__group}>
           <div className={classes.content__card__wrapper__price}>
             <p>
               <span>Price:</span>
             </p>
-            <p>$250</p>
+            <p>${props.price}</p>
           </div>
-          <button>
+          <button type="button" onClick={() => buttonAlert()}>
             <svg
               width="12"
               height="12"
