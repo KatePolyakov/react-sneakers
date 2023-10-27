@@ -1,84 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Card } from '../Card/Card';
 
 import classes from './Content.module.scss';
 
 export const Content = () => {
-  const [items, setItems] = useState([
-    {
-      title: 'Sneakers Nike Blazer Mid Suede',
-      imageURL: '/img/sneakers/1.jpg',
-      price: '150',
-      id: '1',
-    },
-    {
-      title: 'Sneakers Nike Air Max 270',
-      imageURL: '/img/sneakers/2.jpg',
-      price: '210',
-      id: '2',
-    },
-    {
-      title: 'Sneakers Nike Blazer Mid Suede',
-      imageURL: '/img/sneakers/3.jpg',
-      price: '150',
-      id: '3',
-    },
-    {
-      title: 'Sneakers Puma X Aka Boku Future Rider',
-      imageURL: '/img/sneakers/4.jpg',
-      price: '85',
-      id: '4',
-    },
-    {
-      title: 'Sneakers Under Armour Curry 8',
-      imageURL: '/img/sneakers/5.jpg',
-      price: '105',
-      id: '5',
-    },
-    {
-      title: 'Sneakers Nike Kyrie 7',
-      imageURL: '/img/sneakers/6.jpg',
-      price: '140',
-      id: '6',
-    },
-    {
-      title: 'Sneakers Jordan Air Jordan 11',
-      imageURL: '/img/sneakers/7.jpg',
-      price: '240',
-      id: '7',
-    },
-    {
-      title: 'Sneakers Nike Lebron XVIII Low',
-      imageURL: '/img/sneakers/8.jpg',
-      price: '400',
-      id: '8',
-    },
-    {
-      title: 'Sneakers Nike Blazer Mid Suede',
-      imageURL: '/img/sneakers/9.jpg',
-      price: '145',
-      id: '9',
-    },
-    {
-      title: 'Sneakers Puma X Aka Boku Future Rider',
-      imageURL: '/img/sneakers/10.jpg',
-      price: '97',
-      id: '10',
-    },
-    {
-      title: "Men's Sneakers Nike Kyrie Flytrap IV",
-      imageURL: '/img/sneakers/11.jpg',
-      price: '179',
-      id: '11',
-    },
-    {
-      title: 'Sneakers Nike LeBron XVIII',
-      imageURL: '/img/sneakers/12.jpg',
-      price: '450',
-      id: '12',
-    },
-  ]);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch('https://653a0702e3b530c8d9e8fc2d.mockapi.io/items')
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+
   return (
     <div className={classes.content}>
       <div className={classes.content__search__group}>
