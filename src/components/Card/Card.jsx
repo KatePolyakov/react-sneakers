@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import classes from './Card.module.scss';
 
-export const Card = (props) => {
+export const Card = ({ onAddFav, imageURL, title, price, onPlusClick }) => {
   const [isAdded, setIsAdded] = useState(false);
 
   const onClickPlus = () => {
+    onPlusClick({ imageURL, title, price });
     setIsAdded(!isAdded);
   };
+
+
 
   // useEffect(() => {
   //   console.log('change');
@@ -17,7 +20,7 @@ export const Card = (props) => {
     <div className={classes.content__card}>
       <div className={classes.content__card__wrapper}>
         <div className={classes.content__favorite}>
-          <button type="button" onClick={props.onAddFav}>
+          <button type="button" onClick={onAddFav}>
             <svg
               width="32"
               height="32"
@@ -33,14 +36,14 @@ export const Card = (props) => {
             </svg>
           </button>
         </div>
-        <img src={props.imageUrl} alt="Sneakers_" />
-        <p>{props.title}</p>
+        <img src={imageURL} alt="Sneakers_" />
+        <p>{title}</p>
         <div className={classes.content__card__wrapper__group}>
           <div className={classes.content__card__wrapper__price}>
             <p>
               <span>Price:</span>
             </p>
-            <p>${props.price}</p>
+            <p>${price}</p>
           </div>
           <button type="button" onClick={onClickPlus}>
             {isAdded === true ? (

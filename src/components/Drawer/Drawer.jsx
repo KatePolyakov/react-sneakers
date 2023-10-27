@@ -3,6 +3,9 @@ import React from 'react';
 import classes from './Drawer.module.scss';
 
 export const Drawer = ({ onCloseCart, items = [] }) => {
+
+  console.log('items', items);
+  
   return (
     <div className={classes.drawer}>
       <div className={classes.drawer__wrapper}>
