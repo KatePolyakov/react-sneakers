@@ -8,9 +8,22 @@ import { useState } from 'react';
 function App() {
   const [cartOpened, setCartOpened] = useState(false);
 
+  const [cartItems, setCartItems] = useState([{
+    "title": "Sneakers Nike Blazer Mid Suede",
+    "imageURL": "/img/sneakers/1.jpg",
+    "price": "150",
+    "id": "1"
+  },
+  {
+    "title": "Sneakers Nike Air Max 270",
+    "imageURL": "/img/sneakers/2.jpg",
+    "price": "210",
+    "id": "2"
+  }]);
+
   return (
     <div className={classes.wrapper}>
-      {cartOpened && <Drawer onCloseCart={() => setCartOpened(false)} />}
+      {cartOpened && <Drawer items={cartItems} onCloseCart={() => setCartOpened(false)} />}
 
       <Header onClickCart={() => setCartOpened(true)} />
       <Content />
