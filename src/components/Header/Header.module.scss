@@ -41,6 +41,16 @@
     .header__right__wrapper {
       display: flex;
       align-items: center;
+
+      button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border: none;
+        background: none;
+        margin: 0;
+        padding: 0;
+      }
       svg {
         margin-right: 10px;
       }

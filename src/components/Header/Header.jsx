@@ -1,10 +1,11 @@
-import React from 'react';
+
 
 import logo from '../../img/logo.png';
 
 import classes from './Header.module.scss';
 
-export const Header = () => {
+export const Header = (props) => {
+
   return (
     <header className={classes.header}>
       <div className={classes.header__left}>
@@ -16,6 +17,7 @@ export const Header = () => {
       </div>
       <div className={classes.header__right}>
         <div className={classes.header__right__wrapper}>
+        <button onClick={props.onClickCart}>
           <svg
             width="20"
             height="20"
@@ -45,6 +47,7 @@ export const Header = () => {
             />
           </svg>
           <p>$250</p>
+          </button>
         </div>
         <div className={classes.header__right__wrapper}>
           <svg

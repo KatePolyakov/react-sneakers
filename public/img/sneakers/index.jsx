@@ -1,0 +1,1 @@
+export const sneakers1 = '/src/img/sneakers/1.jpg';

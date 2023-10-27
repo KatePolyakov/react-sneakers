@@ -4,10 +4,15 @@ import classes from './Card.module.scss';
 
 export const Card = (props) => {
   const [isAdded, setIsAdded] = useState(false);
+  
 
   const onClickPlus = () => {
     setIsAdded(!isAdded);
   };
+
+  // useEffect(() => {
+  //   console.log('change');
+  // }, [isAdded]);
 
   return (
     <div className={classes.content__card}>
@@ -29,7 +34,7 @@ export const Card = (props) => {
             </svg>
           </button>
         </div>
-        <img src={props.imgURL} alt="Sneakers_" />
+        <img src={props.imageUrl} alt="Sneakers_" />
         <p>{props.title}</p>
         <div className={classes.content__card__wrapper__group}>
           <div className={classes.content__card__wrapper__price}>

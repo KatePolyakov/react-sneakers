@@ -1,5 +1,4 @@
 .drawer {
-  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -18,10 +17,21 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
+    .drawer__wrapper__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
 
-    h2 {
-      margin: 0 0 30px 0;
+      h2 {
+        margin: 0 0 30px 0;
+      }
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
     }
+
     .drawer__cartItems {
       flex-grow: 1;
       .drawer__cartItem {
