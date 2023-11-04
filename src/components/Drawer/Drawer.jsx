@@ -4,7 +4,7 @@ import classes from './Drawer.module.scss';
 
 export const Drawer = ({ onCloseCart, items = [] }) => {
 
-  console.log('items', items);
+  // console.log('items', items);
   
   return (
     <div className={classes.drawer}>

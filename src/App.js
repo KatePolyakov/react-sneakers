@@ -9,6 +9,7 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     fetch('https://653a0702e3b530c8d9e8fc2d.mockapi.io/items')
@@ -24,13 +25,19 @@ function App() {
     setCartItems((prev) => [...prev, obj]);
   };
 
+  const onChangeSearchValue = (event) => {
+    setSearchValue(event.target.value);
+    console.log(event.target.value);
+  };
+
   return (
     <div className={classes.wrapper}>
       {cartOpened && <Drawer items={cartItems} onCloseCart={() => setCartOpened(false)} />}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className={classes.content}>
         <div className={classes.content__search__group}>
-          <h1>All Sneakers</h1>
+          {/* <h1>All Sneakers</h1> */}
+          <h1>{searchValue ? `Search: "${searchValue}"` : 'All Sneakers'}</h1>
           <div className={classes.content__search}>
             <svg
               width="16"
@@ -45,19 +52,22 @@ function App() {
                 stroke-linecap="round"
               />
             </svg>
-            <input placeholder="Search..." />
+            <input onChange={onChangeSearchValue} value={searchValue} placeholder="Search..." />
           </div>
         </div>
         <div className={classes.content__items}>
-          {items.map((val) => (
-            <Card
-              title={val.title}
-              price={val.price}
-              imageURL={val.imageURL}
-              onPlusClick={(obj) => onAddToCard(obj)}
-              onAddFav={() => console.log('favorite')}
-            />
-          ))}
+          {items
+            .filter((val) => val.title.toLowerCase().includes(searchValue.toLowerCase()))
+            .map((val) => (
+              <Card
+                key={val.id}
+                title={val.title}
+                price={val.price}
+                imageURL={val.imageURL}
+                onPlusClick={(obj) => onAddToCard(obj)}
+                // onAddFav={() => console.log('favorite')}
+              />
+            ))}
         </div>
       </div>
     </div>
