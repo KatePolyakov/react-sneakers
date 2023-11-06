@@ -22,6 +22,7 @@
         background: none;
         margin: 0;
         padding: 0;
+        cursor: pointer;
 
         img {
           width: 32px;
@@ -68,10 +69,12 @@
         background: none;
         border: none;
         cursor: pointer;
+
+        img {
+          width: 32px;
+          height: 32%;
+        }
       }
     }
   }
-}
-
-.content__card:hover {
 }
