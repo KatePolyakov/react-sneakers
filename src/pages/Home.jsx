@@ -5,9 +5,7 @@ import Search from '../img/search.svg';
 
 import classes from './Home.module.scss';
 
-function Home({items, searchValue, setSearchValue, onChangeSearchValue, onAddToCart}) {
-  
-
+function Home({ items, searchValue, setSearchValue, onChangeSearchValue, onAddToCart, cartItems }) {
   // const renderItems = () => {
   //   const filtredItems = items.filter((item) =>
   //     item.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -30,16 +28,17 @@ function Home({items, searchValue, setSearchValue, onChangeSearchValue, onAddToC
         </div>
       </div>
       <div className={classes.content__items}>
-      
         {items
-          .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((item) => (
+          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((item, index) => (
             <Card
               key={item.id}
-              title={item.title}
-              price={item.price}
-              imageURL={item.imageURL}
               onPlusClick={(obj) => onAddToCart(obj)}
+              addedCart={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+              {...item}
+              // title={item.title}
+              // price={item.price}
+              // imageURL={item.imageURL}
             />
           ))}
       </div>

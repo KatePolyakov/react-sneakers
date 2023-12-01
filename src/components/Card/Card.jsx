@@ -7,12 +7,12 @@ import checked from '../../img/btn-checked.svg';
 
 import classes from './Card.module.scss';
 
-export const Card = ({ imageURL, title, price, onPlusClick }) => {
-  const [isAdded, setIsAdded] = useState(false);
+export const Card = ({ id, imageURL, title, price, onPlusClick, addedCart=false }) => {
+  const [isAdded, setIsAdded] = useState(addedCart);
   const [isFavourite, setIsFavourite] = useState(false);
 
   const onClickPlus = () => {
-    onPlusClick({ imageURL, title, price });
+    onPlusClick({ id, imageURL, title, price });
     setIsAdded(!isAdded);
   };
 
