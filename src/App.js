@@ -13,12 +13,16 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [cartOpened, setCartOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
+      
       const cartResponse = await axios.get('https://653a0702e3b530c8d9e8fc2d.mockapi.io/cart');
 
       const itemsResponse = await axios.get('https://653a0702e3b530c8d9e8fc2d.mockapi.io/items');
+
+      setIsLoading(false);
 
       setCartItems(cartResponse.data);
       setItems(itemsResponse.data);
@@ -28,8 +32,8 @@ function App() {
   }, []);
 
   const onAddToCart = (obj) => {
-    console.log('obj', obj);
-    console.log('carts', cartItems);
+    // console.log('obj', obj);
+    // console.log('carts', cartItems);
     if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
       axios.delete(`https://653a0702e3b530c8d9e8fc2d.mockapi.io/cart/${obj.id}`);
       setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
@@ -74,6 +78,7 @@ function App() {
               setSearchValue={setSearchValue}
               onChangeSearchValue={onChangeSearchValue}
               onAddToCart={onAddToCart}
+              isLoading={isLoading}
             />
           }
           exact

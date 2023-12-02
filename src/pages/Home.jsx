@@ -5,19 +5,32 @@ import Search from '../img/search.svg';
 
 import classes from './Home.module.scss';
 
-function Home({ items, searchValue, setSearchValue, onChangeSearchValue, onAddToCart, cartItems }) {
-  // const renderItems = () => {
-  //   const filtredItems = items.filter((item) =>
-  //     item.title.toLowerCase().includes(searchValue.toLowerCase()),
-  //   );
-  //   return filtredItems.map((item, index) => (
-  //     <Card
-  //       key={index}
-  //       onPlus={(obj) => onAddToCard(obj)}
-  //       {...item}
-  //     />
-  //   ));
-  // };
+function Home({
+  items,
+  searchValue,
+  setSearchValue,
+  onChangeSearchValue,
+  onAddToCart,
+  cartItems,
+  isLoading,
+}) {
+  const renderItems = () => {
+    const filteredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    return (isLoading ? [...Array(10)] : filteredItems).map((item, index) => (
+      <Card
+        key={index}
+        onPlusClick={(obj) => onAddToCart(obj)}
+        addedCart={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        loading={isLoading}
+        {...item}
+        // title={item.title}
+        // price={item.price}
+        // imageURL={item.imageURL}
+      />
+    ));
+  };
   return (
     <div className={classes.content}>
       <div className={classes.content__search__group}>
@@ -27,21 +40,7 @@ function Home({ items, searchValue, setSearchValue, onChangeSearchValue, onAddTo
           <input onChange={onChangeSearchValue} value={searchValue} placeholder="Search..." />
         </div>
       </div>
-      <div className={classes.content__items}>
-        {items
-          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((item, index) => (
-            <Card
-              key={index}
-              onPlusClick={(obj) => onAddToCart(obj)}
-              addedCart={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
-              {...item}
-              // title={item.title}
-              // price={item.price}
-              // imageURL={item.imageURL}
-            />
-          ))}
-      </div>
+      <div className={classes.content__items}>{renderItems()}</div>
     </div>
   );
 }
