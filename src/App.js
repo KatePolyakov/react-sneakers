@@ -30,9 +30,9 @@ function App() {
   const onAddToCart = (obj) => {
     console.log('obj', obj);
     console.log('carts', cartItems);
-    if (cartItems.find((item) => item.id === obj.id)) {
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
       axios.delete(`https://653a0702e3b530c8d9e8fc2d.mockapi.io/cart/${obj.id}`);
-      setCartItems((prev) => prev.filter((item) => item.id !== obj.id));
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
     } else {
       axios
         .post('https://653a0702e3b530c8d9e8fc2d.mockapi.io/cart', obj)
@@ -42,7 +42,7 @@ function App() {
 
   const onRemoveCart = (id) => {
     axios.delete(`https://653a0702e3b530c8d9e8fc2d.mockapi.io/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
   };
 
   //search

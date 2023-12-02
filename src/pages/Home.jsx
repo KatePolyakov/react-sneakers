@@ -32,7 +32,7 @@ function Home({ items, searchValue, setSearchValue, onChangeSearchValue, onAddTo
           .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
           .map((item, index) => (
             <Card
-              key={item.id}
+              key={index}
               onPlusClick={(obj) => onAddToCart(obj)}
               addedCart={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
               {...item}
