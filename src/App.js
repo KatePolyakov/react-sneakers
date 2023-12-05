@@ -8,6 +8,7 @@ import { Header } from './components/Header/Header';
 import classes from './app.module.scss';
 import Home from './pages/Home';
 
+
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
