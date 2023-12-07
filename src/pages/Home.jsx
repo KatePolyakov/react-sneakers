@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { Card } from '../components/Card/Card';
 
 import Search from '../img/search.svg';
@@ -14,6 +15,8 @@ function Home({
   cartItems,
   isLoading,
 }) {
+
+  
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -22,7 +25,6 @@ function Home({
       <Card
         key={index}
         onPlusClick={(obj) => onAddToCart(obj)}
-        addedCart={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         {...item}
         // title={item.title}

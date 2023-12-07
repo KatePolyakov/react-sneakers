@@ -1,30 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ContentLoader from 'react-content-loader';
 
 import unliked from '../../img/unliked.svg';
 import liked from '../../img/liked.svg';
 import plus from '../../img/btn-plus.svg';
 import checked from '../../img/btn-checked.svg';
+import AppContext from '../../Context';
 
 import classes from './Card.module.scss';
 
-
-export const Card = ({
-  id,
-  imageURL,
-  title,
-  price,
-  onPlusClick,
-  addedCart = false,
-  loading = false,
-}) => {
-  const [isAdded, setIsAdded] = useState(addedCart);
+export const Card = ({ idItem, imageURL, title, price, onPlusClick, loading = false }) => {
+  const { getAddedItems } = useContext(AppContext);
   const [isFavourite, setIsFavourite] = useState(false);
 
   const onClickPlus = () => {
-    onPlusClick({ id, imageURL, title, price });
-    setIsAdded(!isAdded);
+    onPlusClick({ imageURL, title, price, idItem });
+    console.log("id", idItem)
   };
+
+  
 
   const onClickFavourite = () => {
     setIsFavourite(!isFavourite);
@@ -63,7 +57,7 @@ export const Card = ({
               <p>${price}</p>
             </div>
             <button type="button" onClick={onClickPlus}>
-              {isAdded === true ? (
+              {getAddedItems(idItem) === true ? (
                 <img src={checked} alt="checked" />
               ) : (
                 <img src={plus} alt="plus" />

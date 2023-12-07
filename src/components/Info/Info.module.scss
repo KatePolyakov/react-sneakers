@@ -1,0 +1,26 @@
+.drawer__empty {
+  text-align: center;
+  margin-top: 25px;
+
+  img {
+    width: 125px;
+    margin-top: 75px;
+  }
+
+  button {
+    width: 100%;
+    border-radius: 18px;
+    background: #9dd458;
+    color: #fff;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    height: 55px;
+    margin-top: 35px;
+    border: none;
+    cursor: pointer;
+  }
+}
