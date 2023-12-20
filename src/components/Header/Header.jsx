@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../img/logo.png';
@@ -6,13 +5,11 @@ import cart from '../../img/cart.svg';
 import user from '../../img/user.svg';
 
 import classes from './Header.module.scss';
+import { useCart } from '../Hooks/useCart';
 
-import AppContext from '../../Context';
 
 export const Header = (props) => {
-  const { cartItems } = useContext(AppContext);
-
-  const totalPrice =  cartItems.reduce((sum, obj) => Number(obj.price) + sum, 0);
+  const { totalPrice } = useCart();
   return (
     <header className={classes.header}>
       <Link to="/">

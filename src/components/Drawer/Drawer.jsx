@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 
-import AppContext from '../../Context';
 import Info from '../Info/Info';
 
 import Remove from '../../img/btn-remove.svg';
@@ -9,14 +8,15 @@ import emptyCard from '../../img/empty-cart.jpg';
 import completeOrder from '../../img/complete-order.jpg';
 
 import classes from './Drawer.module.scss';
+import { useCart } from '../Hooks/useCart';
 
 export const Drawer = ({ onCloseCart, onRemove, items = [] }) => {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const {cartItems, setCartItems, totalPrice } = useCart();
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [idOrder, setIdOrder] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const totalPrice =  cartItems.reduce((sum, obj) => Number(obj.price) + sum, 0);
+  
 
   const onClickOrder = async () => {
     try {
