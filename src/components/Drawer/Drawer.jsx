@@ -10,7 +10,7 @@ import completeOrder from '../../img/complete-order.jpg';
 import classes from './Drawer.module.scss';
 import { useCart } from '../Hooks/useCart';
 
-export const Drawer = ({ onCloseCart, onRemove, items = [] }) => {
+export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
   const {cartItems, setCartItems, totalPrice } = useCart();
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [idOrder, setIdOrder] = useState();
@@ -38,7 +38,7 @@ export const Drawer = ({ onCloseCart, onRemove, items = [] }) => {
     setIsLoading(false);
   };
   return (
-    <div className={classes.drawer}>
+    <div className={`${classes.drawer} ${opened ? classes.drawerVisible : ''}`}>
       <div className={classes.drawer__wrapper}>
         <div className={classes.drawer__wrapper__header}>
           <h2>Cart</h2>

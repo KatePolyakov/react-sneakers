@@ -66,13 +66,14 @@ function App() {
     <AppContext.Provider
       value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened, onAddToCart }}>
       <div className={classes.wrapper}>
-        {cartOpened && (
           <Drawer
             items={cartItems}
             onCloseCart={() => setCartOpened(false)}
             onRemove={onRemoveCart}
+            opened={cartOpened}
           />
-        )}
+
+
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Routes>
