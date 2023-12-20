@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Card } from '../components/Card/Card';
+import { Card } from '../../components/Card/Card';
 import axios from 'axios';
+
+import classes from './Orders.module.scss'
 
 export const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -21,19 +23,13 @@ export const Orders = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.Orders__content}>
       <div>
-        <h2>My orders</h2>
-        <div>
+        <h1>My orders</h1>
+        <div className={classes.Orders__items}>
           {isLoading
             ? [...Array(8)]
-            : orders.map((item, index) => (
-                <Card
-                  key={index}
-                  loading={isLoading}
-                  {...item}
-                />
-              ))}
+            : orders.map((item, index) => <Card key={index} loading={isLoading} {...item} />)}
         </div>
       </div>
     </div>

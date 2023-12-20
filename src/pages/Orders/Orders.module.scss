@@ -1,0 +1,21 @@
+.Orders {
+  &__content {
+    padding: 40px;
+
+    h1 {
+      margin: 0;
+      color: #000;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  &__items {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+}

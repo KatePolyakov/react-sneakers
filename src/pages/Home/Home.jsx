@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Card } from '../components/Card/Card';
+import { Card } from '../../components/Card/Card';
 
-import Search from '../img/search.svg';
+import Search from '../../img/search.svg';
 
 import classes from './Home.module.scss';
 
@@ -15,8 +15,6 @@ function Home({
   cartItems,
   isLoading,
 }) {
-
-  
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase()),

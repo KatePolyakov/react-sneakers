@@ -5,8 +5,8 @@ import axios from 'axios';
 import { Drawer } from './components/Drawer/Drawer';
 import { Header } from './components/Header/Header';
 import AppContext from './Context';
-import Home from './pages/Home';
-import { Orders } from './pages/Orders';
+import Home from './pages/Home/Home';
+import { Orders } from './pages/Orders/Orders';
 
 import classes from './app.module.scss';
 
@@ -63,7 +63,8 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened, onAddToCart }}>
+    <AppContext.Provider
+      value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened, onAddToCart }}>
       <div className={classes.wrapper}>
         {cartOpened && (
           <Drawer
