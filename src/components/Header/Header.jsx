@@ -7,7 +7,6 @@ import user from '../../img/user.svg';
 import classes from './Header.module.scss';
 import { useCart } from '../Hooks/useCart';
 
-
 export const Header = (props) => {
   const { totalPrice } = useCart();
   return (
@@ -28,10 +27,12 @@ export const Header = (props) => {
             <p>{totalPrice}</p>
           </button>
         </div>
-        <div className={classes.header__right__wrapper}>
-          <img src={user} alt="user" />
-          <p>Profile</p>
-        </div>
+        <Link to="/orders">
+          <div className={classes.header__right__wrapper}>
+            <img src={user} alt="user" />
+            <p>Profile</p>
+          </div>
+        </Link>
       </div>
     </header>
   );

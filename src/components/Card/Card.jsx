@@ -15,10 +15,8 @@ export const Card = ({ idItem, imageURL, title, price, onPlusClick, loading = fa
 
   const onClickPlus = () => {
     onPlusClick({ imageURL, title, price, idItem });
-    console.log("id", idItem)
+    console.log('id', idItem);
   };
-
-  
 
   const onClickFavourite = () => {
     setIsFavourite(!isFavourite);
@@ -56,13 +54,15 @@ export const Card = ({ idItem, imageURL, title, price, onPlusClick, loading = fa
               </p>
               <p>${price}</p>
             </div>
-            <button type="button" onClick={onClickPlus}>
-              {getAddedItems(idItem) === true ? (
-                <img src={checked} alt="checked" />
-              ) : (
-                <img src={plus} alt="plus" />
-              )}
-            </button>
+            {onPlusClick && (
+              <button type="button" onClick={onClickPlus}>
+                {getAddedItems(idItem) === true ? (
+                  <img src={checked} alt="checked" />
+                ) : (
+                  <img src={plus} alt="plus" />
+                )}
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,6 +6,7 @@ import { Drawer } from './components/Drawer/Drawer';
 import { Header } from './components/Header/Header';
 import AppContext from './Context';
 import Home from './pages/Home';
+import { Orders } from './pages/Orders';
 
 import classes from './app.module.scss';
 
@@ -54,7 +55,7 @@ function App() {
 
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   const getAddedItems = (idItem) => {
@@ -62,7 +63,7 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened }}>
+    <AppContext.Provider value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened, onAddToCart }}>
       <div className={classes.wrapper}>
         {cartOpened && (
           <Drawer
@@ -89,6 +90,7 @@ function App() {
             }
             exact
           />
+          <Route path="/orders" element={<Orders />} exact />
         </Routes>
       </div>
     </AppContext.Provider>
