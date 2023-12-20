@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../img/logo.png';
@@ -6,7 +7,12 @@ import user from '../../img/user.svg';
 
 import classes from './Header.module.scss';
 
+import AppContext from '../../Context';
+
 export const Header = (props) => {
+  const { cartItems } = useContext(AppContext);
+
+  const totalPrice =  cartItems.reduce((sum, obj) => Number(obj.price) + sum, 0);
   return (
     <header className={classes.header}>
       <Link to="/">
@@ -22,7 +28,7 @@ export const Header = (props) => {
         <div className={classes.header__right__wrapper}>
           <button onClick={props.onClickCart}>
             <img src={cart} alt="cart" />
-            <p>$250</p>
+            <p>{totalPrice}</p>
           </button>
         </div>
         <div className={classes.header__right__wrapper}>

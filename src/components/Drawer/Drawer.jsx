@@ -16,6 +16,8 @@ export const Drawer = ({ onCloseCart, onRemove, items = [] }) => {
   const [idOrder, setIdOrder] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const totalPrice =  cartItems.reduce((sum, obj) => Number(obj.price) + sum, 0);
+
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
@@ -69,14 +71,14 @@ export const Drawer = ({ onCloseCart, onRemove, items = [] }) => {
                   <p>TOTAL: </p>
                   <div></div>
                   <p>
-                    <span>$250</span>
+                    <span>${totalPrice}</span>
                   </p>
                 </li>
                 <li className={classes.drawer__cartSum}>
                   <p>TAX 12%: </p>
                   <div></div>
                   <p>
-                    <span>$35</span>
+                    <span>${(totalPrice / 100 * 12).toFixed(2)}</span>
                   </p>
                 </li>
               </ul>
