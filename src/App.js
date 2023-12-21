@@ -19,36 +19,51 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const cartResponse = await axios.get('https://450e36acc987c717.mokky.dev/cart');
+      try {
+        const [cartResponse, itemsResponse] = await Promise.all([
+          axios.get('https://450e36acc987c717.mokky.dev/cart'),
+          axios.get('https://450e36acc987c717.mokky.dev/items')
+        ]);
 
-      const itemsResponse = await axios.get('https://450e36acc987c717.mokky.dev/items');
+        setIsLoading(false);
 
-      setIsLoading(false);
-
-      setCartItems(cartResponse.data);
-      setItems(itemsResponse.data);
+        setCartItems(cartResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert('Error');
+        console.error(error);
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
-    // console.log('obj', obj);
-    // console.log('carts', cartItems);
-    if (cartItems.find((item) => item.idItem === obj.idItem)) {
-      axios.delete(`https://450e36acc987c717.mokky.dev/cart/${obj.idItem}`);
-      setCartItems((prev) => prev.filter((item) => item.idItem !== obj.idItem));
-      console.log('obj', obj);
-    } else {
-      axios
-        .post('https://450e36acc987c717.mokky.dev/cart', obj)
-        .then((res) => setCartItems((prev) => [...prev, res.data]));
+  const onAddToCart = async (obj) => {
+    try {
+      // console.log('obj', obj);
+      // console.log('carts', cartItems);
+      if (cartItems.find((item) => item.idItem === obj.idItem)) {
+        await axios.delete(`https://450e36acc987c717.mokky.dev/cart/${obj.idItem}`);
+        setCartItems((prev) => prev.filter((item) => item.idItem !== obj.idItem));
+        //console.log('obj', obj);
+      } else {
+        await axios
+          .post('https://450e36acc987c717.mokky.dev/cart', obj)
+          .then((res) => setCartItems((prev) => [...prev, res.data]));
+      }
+    } catch (error) {
+      alert('Error');
     }
   };
 
-  const onRemoveCart = (idItem) => {
-    axios.delete(`https://450e36acc987c717.mokky.dev/cart/${idItem}`);
-    setCartItems((prev) => prev.filter((item) => item.idItem !== idItem));
+  const onRemoveCart = async (idItem) => {
+    try {
+      await axios.delete(`https://450e36acc987c717.mokky.dev/cart/${idItem}`);
+      setCartItems((prev) => prev.filter((item) => item.idItem !== idItem));
+    } catch (error) {
+      alert('Error');
+      console.error(error);
+    }
   };
 
   //search
@@ -66,13 +81,12 @@ function App() {
     <AppContext.Provider
       value={{ items, cartItems, getAddedItems, setCartItems, setCartOpened, onAddToCart }}>
       <div className={classes.wrapper}>
-          <Drawer
-            items={cartItems}
-            onCloseCart={() => setCartOpened(false)}
-            onRemove={onRemoveCart}
-            opened={cartOpened}
-          />
-
+        <Drawer
+          items={cartItems}
+          onCloseCart={() => setCartOpened(false)}
+          onRemove={onRemoveCart}
+          opened={cartOpened}
+        />
 
         <Header onClickCart={() => setCartOpened(true)} />
 
