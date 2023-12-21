@@ -10,13 +10,11 @@ import completeOrder from '../../img/complete-order.jpg';
 import classes from './Drawer.module.scss';
 import { useCart } from '../Hooks/useCart';
 
-export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
-  const {cartItems, setCartItems, totalPrice } = useCart();
+export const Drawer = ({ onCloseCart, onRemove, items = [], opened, idItem, id }) => {
+  const { cartItems, setCartItems, totalPrice } = useCart();
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [idOrder, setIdOrder] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  
 
   const onClickOrder = async () => {
     try {
@@ -28,7 +26,7 @@ export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
       setIdOrder(data.id);
       setIsOrderCompleted(true);
       setCartItems([]);
-      for (let i=0; i < cartItems.length; i++) {
+      for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
         await axios.delete('https://450e36acc987c717.mokky.dev/cart/' + item.id);
       }
@@ -51,7 +49,7 @@ export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
           <div>
             <div className={classes.drawer__cartItems}>
               {items.map((obj) => (
-                <div className={classes.drawer__cartItem} id={obj.idItem}>
+                <div className={classes.drawer__cartItem} id={obj.id}>
                   <img src={obj.imageURL} alt="Sneaker photo_preview" />
                   <div className={classes.drawer__cartItem__priceGroup}>
                     <p>{obj.title}</p>
@@ -59,7 +57,7 @@ export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
                       <span>${obj.price}</span>
                     </p>
                   </div>
-                  <button onClick={() => onRemove(obj.idItem)}>
+                  <button onClick={() => onRemove(obj.id)}>
                     <img className={classes.remove} src={Remove} alt="remove" />
                   </button>
                 </div>
@@ -78,7 +76,7 @@ export const Drawer = ({ onCloseCart, onRemove, items = [], opened }) => {
                   <p>TAX 12%: </p>
                   <div></div>
                   <p>
-                    <span>${(totalPrice / 100 * 12).toFixed(2)}</span>
+                    <span>${((totalPrice / 100) * 12).toFixed(2)}</span>
                   </p>
                 </li>
               </ul>

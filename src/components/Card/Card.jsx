@@ -9,13 +9,13 @@ import AppContext from '../../Context';
 
 import classes from './Card.module.scss';
 
-export const Card = ({ idItem, imageURL, title, price, onPlusClick, loading = false }) => {
+export const Card = ({ id, idItem, imageURL, title, price, onPlusClick, loading = false }) => {
   const { getAddedItems } = useContext(AppContext);
   const [isFavourite, setIsFavourite] = useState(false);
+  const obj = { imageURL, title, price, idItem, id };
 
   const onClickPlus = () => {
-    onPlusClick({ imageURL, title, price, idItem });
-    console.log('id', idItem);
+    onPlusClick(obj);
   };
 
   const onClickFavourite = () => {
@@ -56,7 +56,7 @@ export const Card = ({ idItem, imageURL, title, price, onPlusClick, loading = fa
             </div>
             {onPlusClick && (
               <button type="button" onClick={onClickPlus}>
-                {getAddedItems(idItem) === true ? (
+                {getAddedItems(id) ? (
                   <img src={checked} alt="checked" />
                 ) : (
                   <img src={plus} alt="plus" />

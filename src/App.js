@@ -22,11 +22,10 @@ function App() {
       try {
         const [cartResponse, itemsResponse] = await Promise.all([
           axios.get('https://450e36acc987c717.mokky.dev/cart'),
-          axios.get('https://450e36acc987c717.mokky.dev/items')
+          axios.get('https://450e36acc987c717.mokky.dev/items'),
         ]);
 
         setIsLoading(false);
-
         setCartItems(cartResponse.data);
         setItems(itemsResponse.data);
       } catch (error) {
@@ -40,26 +39,18 @@ function App() {
 
   const onAddToCart = async (obj) => {
     try {
-      // console.log('obj', obj);
-      // console.log('carts', cartItems);
-      if (cartItems.find((item) => item.idItem === obj.idItem)) {
-        await axios.delete(`https://450e36acc987c717.mokky.dev/cart/${obj.idItem}`);
-        setCartItems((prev) => prev.filter((item) => item.idItem !== obj.idItem));
-        //console.log('obj', obj);
-      } else {
         await axios
           .post('https://450e36acc987c717.mokky.dev/cart', obj)
           .then((res) => setCartItems((prev) => [...prev, res.data]));
-      }
     } catch (error) {
       alert('Error');
     }
   };
 
-  const onRemoveCart = async (idItem) => {
+  const onRemoveCart = async (id) => {
     try {
-      await axios.delete(`https://450e36acc987c717.mokky.dev/cart/${idItem}`);
-      setCartItems((prev) => prev.filter((item) => item.idItem !== idItem));
+      await axios.delete(`https://450e36acc987c717.mokky.dev/cart/${id}`);
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
     } catch (error) {
       alert('Error');
       console.error(error);
@@ -70,7 +61,6 @@ function App() {
 
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
-    // console.log(event.target.value);
   };
 
   const getAddedItems = (idItem) => {
